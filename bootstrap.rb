@@ -54,7 +54,7 @@ end
 
 get '/admin/edit/:id' do
   # fill form
-  @page = Page.get(params[:id])
+  @page = Page.get!(params[:id].to_i)
   erb :edit_form
 end
 
@@ -63,7 +63,7 @@ post '/admin/edit/:id' do
   params.delete 'submit'
   params.delete 'id'
   params.delete 'splat'
-  params.delete 'captures' 
+  params.delete 'captures'
   params[:updated_at] = Time.now
   @page.attributes = params
   @page.save
